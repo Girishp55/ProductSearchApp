@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ProductSearchApp.Models.tblProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Product List Page</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    <span>Product Name:</span> @Html.TextBox("searching")
+    <input type="submit" value="Search" class="btn btn-sm btn-success"/>
+    <br />
+    <br />
+}
+
+    <table class="table table-bordered table-responsive table-group-divider table-striped">
+        <tr class="alert-success">
+            <th>
+                Product Name
+            </th>
+            <th>
+                Size
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Manufacturing Date
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ProductName
+                </td>
+
+                <td>
+                    @item.Size
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @item.MfgDate.ToString("dd-MM-yyyy")
+                </td>
+                <td>
+                    @item.Category
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+
+
